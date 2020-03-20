@@ -8,15 +8,17 @@ async function run(): Promise<void> {
 
     if (osvar === 'darwin') {
       // MacOSX
+      await exec('npm i -g nativescript')
     } else if (osvar === 'win32') {
       // Windows
       await exec(
         'setx path "%path%;c:\\Program Files (x86)\\Android\\android-sdk\\build-tools\\29.0.3"'
       )
+      await exec('npm i -g nativescript')
     } else {
       // Linux
+      await exec('sudo npm i -g nativescript')
     }
-    await exec('npm i -g nativescript')
     await exec('tns doctor')
   } catch (error) {
     core.setFailed(error.toString())
