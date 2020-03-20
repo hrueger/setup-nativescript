@@ -979,15 +979,17 @@ function run() {
             const osvar = process.platform.toLowerCase();
             if (osvar === 'darwin') {
                 // MacOSX
+                yield exec('npm i -g nativescript');
             }
             else if (osvar === 'win32') {
                 // Windows
                 yield exec('setx path "%path%;c:\\Program Files (x86)\\Android\\android-sdk\\build-tools\\29.0.3"');
+                yield exec('npm i -g nativescript');
             }
             else {
                 // Linux
+                yield exec('sudo npm i -g nativescript');
             }
-            yield exec('npm i -g nativescript');
             yield exec('tns doctor');
         }
         catch (error) {
