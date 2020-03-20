@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import * as childProcess from 'child_process'
+import {exec as execute} from '@actions/exec'
 
 async function run(): Promise<void> {
   try {
@@ -9,28 +9,38 @@ async function run(): Promise<void> {
       // MacOSX
     } else if (osvar === 'win32') {
       // Windows
-      exec('setx', [
-        'path',
-        "'%path%;c:\\Program Files (x86)\\Android\\android-sdk\\build-tools\\29.0.3'"
-      ])
+      await exec(
+        'setx path "%path%;c:\\Program Files (x86)\\Android\\android-sdk\\build-tools\\29.0.3"'
+      )
     } else {
       // Linux
     }
-    exec('npm', ['i', '-g', 'nativescript'])
-    exec('tns', ['doctor'])
+    await exec('npm i -g nativescript')
+    await exec('tns doctor')
   } catch (error) {
     core.setFailed(error.toString())
   }
 }
 
-function exec(cmd: string, args: string[]): void {
-  console.log(`Executing command "${cmd}" with ${args.toString()}`)
-  const child = childProcess.spawnSync(cmd, args, {encoding: 'utf8'})
+async function exec(cmd: string): Promise<void> {
+  console.log(`Executing command "${cmd}"`)
+  let myOutput = ''
+  let myError = ''
+
+  const options: any = {}
+  options.listeners = {
+    stdout: (data: Buffer) => {
+      myOutput += data.toString()
+    },
+    stderr: (data: Buffer) => {
+      myError += data.toString()
+    }
+  }
+  await execute(cmd, options)
   console.log('Process finished.')
-  console.log('stdout: ', child.stdout)
-  console.log('stderr: ', child.stderr)
-  if (child.status !== 0) {
-    core.setFailed(`Command failed with status code ${child.status}.`)
+  console.log(`Output: ${myOutput}`)
+  if (myError) {
+    core.setFailed(`Command failed with error ${myError}.`)
     process.exit()
   }
 }
