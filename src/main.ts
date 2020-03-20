@@ -36,7 +36,7 @@ async function exec(cmd: string): Promise<void> {
       myError += data.toString()
     }
   }
-  await execute(cmd, options)
+  await execute(cmd, [], options)
   console.log('Process finished.')
   console.log(`Output: ${myOutput}`)
   if (myError) {
