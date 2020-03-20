@@ -111,11 +111,13 @@ function exec(cmd, args) {
     const child = childProcess.spawnSync(cmd, args, { encoding: 'utf8' });
     console.log('Process finished.');
     if (child.error) {
-        console.log('ERROR: ', child.error);
+        throw Error(child.stderr);
     }
     console.log('stdout: ', child.stdout);
     console.log('stderr: ', child.stderr);
-    console.log('exist code: ', child.status);
+    if (child.status !== 0) {
+        core.setFailed(`Command failed with status code ${child.status}.`);
+    }
 }
 run();
 
