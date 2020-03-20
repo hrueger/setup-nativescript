@@ -1008,7 +1008,7 @@ function exec(cmd) {
                 myError += data.toString();
             }
         };
-        yield exec_1.exec(cmd, options);
+        yield exec_1.exec(cmd, [], options);
         console.log('Process finished.');
         console.log(`Output: ${myOutput}`);
         if (myError) {
