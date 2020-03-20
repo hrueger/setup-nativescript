@@ -27,9 +27,6 @@ function exec(cmd: string, args: string[]): void {
   console.log(`Executing command "${cmd}" with ${args.toString()}`)
   const child = childProcess.spawnSync(cmd, args, {encoding: 'utf8'})
   console.log('Process finished.')
-  if (child.error) {
-    throw Error(child.stderr)
-  }
   console.log('stdout: ', child.stdout)
   console.log('stderr: ', child.stderr)
   if (child.status !== 0) {
