@@ -19,7 +19,7 @@ async function run(): Promise<void> {
     exec('npm', ['i', '-g', 'nativescript'])
     exec('tns', ['doctor'])
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed(error.toString())
   }
 }
 
@@ -34,6 +34,7 @@ function exec(cmd: string, args: string[]): void {
   console.log('stderr: ', child.stderr)
   if (child.status !== 0) {
     core.setFailed(`Command failed with status code ${child.status}.`)
+    process.exit()
   }
 }
 
