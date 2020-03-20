@@ -975,6 +975,7 @@ const exec_1 = __webpack_require__(986);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            yield exec('npm config set unsafe-perm=true');
             const osvar = process.platform.toLowerCase();
             if (osvar === 'darwin') {
                 // MacOSX

@@ -3,6 +3,7 @@ import {exec as execute} from '@actions/exec'
 
 async function run(): Promise<void> {
   try {
+    await exec('npm config set unsafe-perm=true')
     const osvar = process.platform.toLowerCase()
 
     if (osvar === 'darwin') {
