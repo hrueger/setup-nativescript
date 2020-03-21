@@ -19,7 +19,6 @@ async function run(): Promise<void> {
       // Linux
       await exec('sudo npm i -g nativescript')
     }
-    await exec('tns doctor')
   } catch (error) {
     core.setFailed(error.toString())
   }
