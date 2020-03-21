@@ -39,11 +39,12 @@ async function exec(cmd: string): Promise<void> {
       myError += data.toString()
     }
   }
-  await execute(cmd, [], options)
+  const statusCode = await execute(cmd, [], options)
   console.log('Process finished.')
   console.log(`Output: ${myOutput}`)
-  if (myError) {
-    core.setFailed(`Command failed with error ${myError}.`)
+  console.log(`Errors: ${myError}`)
+  if (statusCode !== 0) {
+    core.setFailed(`Command exited with code ${statusCode}`)
     process.exit()
   }
 }
