@@ -47,10 +47,10 @@ jobs:
     - uses: ./
     - name: Clone NativeScript Demo App
       run: git clone https://github.com/NativeScript/nativescript-marketplace-demo
-      - name: Install dependencies
-        run: npm install
-        working-directory: nativescript-marketplace-demo
-      - name: Build NativeScript Demo App
-        run: tns build ios
-        working-directory: nativescript-marketplace-demo
+    - name: Install dependencies
+      run: npm install
+      working-directory: nativescript-marketplace-demo
+    - name: Build NativeScript Demo App
+      run: tns build ios
+      working-directory: nativescript-marketplace-demo
           
