@@ -990,7 +990,6 @@ function run() {
                 // Linux
                 yield exec('sudo npm i -g nativescript');
             }
-            yield exec('tns doctor');
         }
         catch (error) {
             core.setFailed(error.toString());
