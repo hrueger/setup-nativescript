@@ -980,7 +980,19 @@ function run() {
             if (osvar === 'darwin') {
                 // MacOSX
                 yield exec('pip install six');
+                yield exec('brew install maven');
+                yield exec('brew install gradle');
+                yield exec('brew install android-sdk');
                 yield exec('npm i -g nativescript');
+                yield exec('android update sdk --no-ui');
+                yield exec('export MAVEN_HOME=/usr/local/opt/maven');
+                yield exec('export GRADLE_HOME=/usr/local/opt/gradle');
+                yield exec('export ANDROID_HOME=/usr/local/opt/android-sdk');
+                yield exec('export PATH=$MAVEN_HOME/bin:$PATH');
+                yield exec('export PATH=$GRADLE_HOME/bin:$PATH');
+                yield exec('export PATH=$ANDROID_HOME/tools:$PATH');
+                yield exec('export PATH=$ANDROID_HOME/platform-tools:$PATH');
+                yield exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH');
             }
             else if (osvar === 'win32') {
                 // Windows

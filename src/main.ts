@@ -9,7 +9,19 @@ async function run(): Promise<void> {
     if (osvar === 'darwin') {
       // MacOSX
       await exec('pip install six')
+      await exec('brew install maven')
+      await exec('brew install gradle')
+      await exec('brew install android-sdk')
       await exec('npm i -g nativescript')
+      await exec('android update sdk --no-ui')
+      await exec('export MAVEN_HOME=/usr/local/opt/maven')
+      await exec('export GRADLE_HOME=/usr/local/opt/gradle')
+      await exec('export ANDROID_HOME=/usr/local/opt/android-sdk')
+      await exec('export PATH=$MAVEN_HOME/bin:$PATH')
+      await exec('export PATH=$GRADLE_HOME/bin:$PATH')
+      await exec('export PATH=$ANDROID_HOME/tools:$PATH')
+      await exec('export PATH=$ANDROID_HOME/platform-tools:$PATH')
+      await exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH')
     } else if (osvar === 'win32') {
       // Windows
       await exec(
