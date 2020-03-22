@@ -13,7 +13,7 @@ async function run(): Promise<void> {
       await exec('brew install gradle')
       await exec('brew cask install android-sdk')
       await exec(
-        'sdkmanager sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
+        'sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
       )
       await exec('export MAVEN_HOME=/usr/local/opt/maven')
       await exec('export GRADLE_HOME=/usr/local/opt/gradle')
