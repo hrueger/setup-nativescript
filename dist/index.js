@@ -983,7 +983,7 @@ function run() {
                 yield exec('brew install maven');
                 yield exec('brew install gradle');
                 yield exec('brew cask install android-sdk');
-                yield exec('yes | sdkmanager --licenses');
+                yield exec('yes | sdkmanager --licenses', true);
                 yield exec('sdkmanager platform-tools platforms;android-28 build-tools;28.0.3');
                 yield exec('export MAVEN_HOME=/usr/local/opt/maven');
                 yield exec('export GRADLE_HOME=/usr/local/opt/gradle');
@@ -1002,7 +1002,7 @@ function run() {
             }
             else {
                 // Linux
-                yield exec('sudo apt update && sudo apt install android-sdk');
+                yield exec('sudo apt-get update && sudo apt-get install android-sdk');
                 yield exec('sudo npm i -g nativescript');
             }
         }
@@ -1011,7 +1011,7 @@ function run() {
         }
     });
 }
-function exec(cmd) {
+function exec(cmd, hideOutput = false) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`Executing command "${cmd}"`);
         let myOutput = '';
@@ -1027,8 +1027,10 @@ function exec(cmd) {
         };
         const statusCode = yield exec_1.exec(cmd, [], options);
         console.log('Process finished.');
-        console.log(`Output: ${myOutput}`);
-        console.log(`Errors: ${myError}`);
+        if (!hideOutput) {
+            console.log(`Output: ${myOutput}`);
+            console.log(`Errors: ${myError}`);
+        }
         if (statusCode !== 0) {
             core.setFailed(`Command exited with code ${statusCode}`);
             process.exit();

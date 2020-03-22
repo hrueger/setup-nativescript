@@ -12,7 +12,7 @@ async function run(): Promise<void> {
       await exec('brew install maven')
       await exec('brew install gradle')
       await exec('brew cask install android-sdk')
-      await exec('yes | sdkmanager --licenses')
+      await exec('yes | sdkmanager --licenses', true)
       await exec(
         'sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
       )
@@ -33,7 +33,7 @@ async function run(): Promise<void> {
       await exec('npm i -g nativescript')
     } else {
       // Linux
-      await exec('sudo apt update && sudo apt install android-sdk')
+      await exec('sudo apt-get update && sudo apt-get install android-sdk')
       await exec('sudo npm i -g nativescript')
     }
   } catch (error) {
@@ -41,7 +41,7 @@ async function run(): Promise<void> {
   }
 }
 
-async function exec(cmd: string): Promise<void> {
+async function exec(cmd: string, hideOutput=false): Promise<void> {
   console.log(`Executing command "${cmd}"`)
   let myOutput = ''
   let myError = ''
@@ -57,8 +57,10 @@ async function exec(cmd: string): Promise<void> {
   }
   const statusCode = await execute(cmd, [], options)
   console.log('Process finished.')
-  console.log(`Output: ${myOutput}`)
-  console.log(`Errors: ${myError}`)
+  if (!hideOutput) {
+    console.log(`Output: ${myOutput}`)
+    console.log(`Errors: ${myError}`)
+  }
   if (statusCode !== 0) {
     core.setFailed(`Command exited with code ${statusCode}`)
     process.exit()
