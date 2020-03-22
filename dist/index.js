@@ -982,7 +982,7 @@ function run() {
                 yield exec('pip install six');
                 yield exec('brew install maven');
                 yield exec('brew install gradle');
-                yield exec('brew cast install android-sdk');
+                yield exec('brew cask install android-sdk');
                 yield exec('npm i -g nativescript');
                 yield exec('android update sdk --no-ui');
                 yield exec('export MAVEN_HOME=/usr/local/opt/maven');

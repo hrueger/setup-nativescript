@@ -11,7 +11,7 @@ async function run(): Promise<void> {
       await exec('pip install six')
       await exec('brew install maven')
       await exec('brew install gradle')
-      await exec('brew cast install android-sdk')
+      await exec('brew cask install android-sdk')
       await exec('npm i -g nativescript')
       await exec('android update sdk --no-ui')
       await exec('export MAVEN_HOME=/usr/local/opt/maven')
