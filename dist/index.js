@@ -989,8 +989,10 @@ function run() {
             }
             else {
                 // Linux
+                yield exec('wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
+                yield exec('sudo unzip -d $ANDROID_HOME android-sdk.zip');
+                yield exec('echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager "platform-tools platforms;android-28 build-tools;28.0.3"');
                 yield exec('sudo npm i -g nativescript');
-                yield exec('tns doctor');
             }
         }
         catch (error) {
@@ -998,7 +1000,7 @@ function run() {
         }
     });
 }
-function exec(cmd, ignoreErrors = false) {
+function exec(cmd) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`Executing command "${cmd}"`);
         let myOutput = '';
@@ -1016,7 +1018,7 @@ function exec(cmd, ignoreErrors = false) {
         console.log('Process finished.');
         console.log(`Output: ${myOutput}`);
         console.log(`Errors: ${myError}`);
-        if (statusCode !== 0 && !ignoreErrors) {
+        if (statusCode !== 0) {
             core.setFailed(`Command exited with code ${statusCode}`);
             process.exit();
         }
