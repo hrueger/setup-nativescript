@@ -1002,6 +1002,7 @@ function run() {
             }
             else {
                 // Linux
+                yield exec('sudo apt update && sudo apt install android-sdk --yes');
                 yield exec('sudo npm i -g nativescript');
             }
         }
