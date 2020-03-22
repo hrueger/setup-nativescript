@@ -972,6 +972,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
+const sdk_installer_1 = __webpack_require__(780);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -983,16 +984,19 @@ function run() {
                 yield exec('brew install maven');
                 yield exec('brew install gradle');
                 yield exec('brew cask install android-sdk');
-                yield exec('yes | sdkmanager --licenses', true);
-                yield exec('sdkmanager platform-tools platforms;android-28 build-tools;28.0.3');
-                yield exec('export MAVEN_HOME=/usr/local/opt/maven');
-                yield exec('export GRADLE_HOME=/usr/local/opt/gradle');
-                yield exec('export ANDROID_HOME=/usr/local/opt/android-sdk');
-                yield exec('export PATH=$MAVEN_HOME/bin:$PATH');
-                yield exec('export PATH=$GRADLE_HOME/bin:$PATH');
-                yield exec('export PATH=$ANDROID_HOME/tools:$PATH');
-                yield exec('export PATH=$ANDROID_HOME/platform-tools:$PATH');
-                yield exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH');
+                /*await exec('yes | sdkmanager --licenses', true)
+                await exec(
+                  'sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
+                )
+                await exec('export MAVEN_HOME=/usr/local/opt/maven')
+                await exec('export GRADLE_HOME=/usr/local/opt/gradle')
+                await exec('export ANDROID_HOME=/usr/local/opt/android-sdk')
+                await exec('export PATH=$MAVEN_HOME/bin:$PATH')
+                await exec('export PATH=$GRADLE_HOME/bin:$PATH')
+                await exec('export PATH=$ANDROID_HOME/tools:$PATH')
+                await exec('export PATH=$ANDROID_HOME/platform-tools:$PATH')
+                await exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH')*/
+                yield sdk_installer_1.installAndroidSdk(29, 'default', 'x86', undefined);
                 yield exec('npm i -g nativescript');
             }
             else if (osvar === 'win32') {
@@ -1551,6 +1555,67 @@ function isUnixExecutable(stats) {
 /***/ (function(module) {
 
 module.exports = require("fs");
+
+/***/ }),
+
+/***/ 780:
+/***/ (function(__unusedmodule, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core = __importStar(__webpack_require__(470));
+const exec = __importStar(__webpack_require__(986));
+const BUILD_TOOLS_VERSION = '29.0.3';
+const CMDLINE_TOOLS_URL = 'https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip';
+/**
+ * Installs & updates the Android SDK for the macOS platform, including SDK platform for the chosen API level, latest build tools, platform tools, Android Emulator,
+ * and the system image for the chosen API level, CPU arch, and target.
+ */
+function installAndroidSdk(apiLevel, target, arch, emulatorBuild) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log('Installing new cmdline-tools.');
+        yield exec.exec(`mkdir ${process.env.ANDROID_HOME}/cmdline-tools`);
+        yield exec.exec(`curl -fo commandlinetools.zip ${CMDLINE_TOOLS_URL}`);
+        yield exec.exec(`unzip -q commandlinetools.zip -d ${process.env.ANDROID_HOME}/cmdline-tools`);
+        yield exec.exec(`rm -f commandlinetools.zip`);
+        // add paths for commandline-tools and platform-tools
+        core.addPath(`${process.env.ANDROID_HOME}/cmdline-tools/tools:${process.env.ANDROID_HOME}/cmdline-tools/tools/bin:${process.env.ANDROID_HOME}/platform-tools`);
+        console.log('Installing latest build tools, platform tools, and platform.');
+        yield exec.exec(`sh -c \\"sdkmanager --install 'build-tools;${BUILD_TOOLS_VERSION}' platform-tools 'platforms;android-${apiLevel}' > /dev/null"`);
+        if (emulatorBuild) {
+            console.log(`Installing emulator build ${emulatorBuild}.`);
+            yield exec.exec(`curl -fo emulator.zip https://dl.google.com/android/repository/emulator-darwin-${emulatorBuild}.zip`);
+            yield exec.exec(`rm -rf ${process.env.ANDROID_HOME}/emulator`);
+            yield exec.exec(`unzip -q emulator.zip -d ${process.env.ANDROID_HOME}`);
+            yield exec.exec(`rm -f emulator.zip`);
+        }
+        else {
+            console.log('Installing latest emulator.');
+            yield exec.exec(`sh -c \\"sdkmanager --install emulator > /dev/null"`);
+        }
+        console.log('Installing system images.');
+        yield exec.exec(`sh -c \\"sdkmanager --install 'system-images;android-${apiLevel};${target};${arch}' > /dev/null"`);
+    });
+}
+exports.installAndroidSdk = installAndroidSdk;
+
 
 /***/ }),
 
