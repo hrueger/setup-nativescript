@@ -12,8 +12,9 @@ async function run(): Promise<void> {
       await exec('brew install maven')
       await exec('brew install gradle')
       await exec('brew cask install android-sdk')
-      await exec('npm i -g nativescript')
-      await exec('android update sdk --no-ui')
+      await exec(
+        'sdkmanager sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
+      )
       await exec('export MAVEN_HOME=/usr/local/opt/maven')
       await exec('export GRADLE_HOME=/usr/local/opt/gradle')
       await exec('export ANDROID_HOME=/usr/local/opt/android-sdk')
@@ -22,6 +23,7 @@ async function run(): Promise<void> {
       await exec('export PATH=$ANDROID_HOME/tools:$PATH')
       await exec('export PATH=$ANDROID_HOME/platform-tools:$PATH')
       await exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH')
+      await exec('npm i -g nativescript')
     } else if (osvar === 'win32') {
       // Windows
       await exec(

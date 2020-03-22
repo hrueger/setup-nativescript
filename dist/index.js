@@ -983,8 +983,7 @@ function run() {
                 yield exec('brew install maven');
                 yield exec('brew install gradle');
                 yield exec('brew cask install android-sdk');
-                yield exec('npm i -g nativescript');
-                yield exec('android update sdk --no-ui');
+                yield exec('sdkmanager sdkmanager platform-tools platforms;android-28 build-tools;28.0.3');
                 yield exec('export MAVEN_HOME=/usr/local/opt/maven');
                 yield exec('export GRADLE_HOME=/usr/local/opt/gradle');
                 yield exec('export ANDROID_HOME=/usr/local/opt/android-sdk');
@@ -993,6 +992,7 @@ function run() {
                 yield exec('export PATH=$ANDROID_HOME/tools:$PATH');
                 yield exec('export PATH=$ANDROID_HOME/platform-tools:$PATH');
                 yield exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH');
+                yield exec('npm i -g nativescript');
             }
             else if (osvar === 'win32') {
                 // Windows
