@@ -989,6 +989,7 @@ function run() {
             }
             else {
                 // Linux
+                yield exec('$ANDROID_HOME/tools/bin/sdkmanager "tools;26.1.1"'); // platform-tools platforms;android-28 build-tools;28.0.3
                 yield exec('sudo npm i -g nativescript');
             }
         }
