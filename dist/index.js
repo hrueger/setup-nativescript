@@ -983,9 +983,8 @@ function run() {
                 yield exec('brew install maven');
                 yield exec('brew install gradle');
                 yield exec('brew cask install android-sdk');
-                yield exec('echo y | sdkmanager platform-tools');
-                yield exec('echo y | sdkmanager platforms;android-28');
-                yield exec('echo y | sdkmanager build-tools;28.0.3');
+                yield exec('yes | sdkmanager --licenses');
+                yield exec('yes | sdkmanager platform-tools platforms;android-28 build-tools;28.0.3');
                 yield exec('export MAVEN_HOME=/usr/local/opt/maven');
                 yield exec('export GRADLE_HOME=/usr/local/opt/gradle');
                 yield exec('export ANDROID_HOME=/usr/local/opt/android-sdk');

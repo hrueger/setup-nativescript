@@ -12,11 +12,10 @@ async function run(): Promise<void> {
       await exec('brew install maven')
       await exec('brew install gradle')
       await exec('brew cask install android-sdk')
-
-      await exec('echo y | sdkmanager platform-tools')
-      await exec('echo y | sdkmanager platforms;android-28')
-      await exec('echo y | sdkmanager build-tools;28.0.3')
-
+      await exec('yes | sdkmanager --licenses')
+      await exec(
+        'yes | sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
+      )
       await exec('export MAVEN_HOME=/usr/local/opt/maven')
       await exec('export GRADLE_HOME=/usr/local/opt/gradle')
       await exec('export ANDROID_HOME=/usr/local/opt/android-sdk')
