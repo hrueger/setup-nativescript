@@ -989,8 +989,8 @@ function run() {
             }
             else {
                 // Linux
-                yield exec('$ANDROID_HOME/tools/bin/sdkmanager "tools;26.1.1"'); // platform-tools platforms;android-28 build-tools;28.0.3
                 yield exec('sudo npm i -g nativescript');
+                yield exec('tns doctor');
             }
         }
         catch (error) {
@@ -998,7 +998,7 @@ function run() {
         }
     });
 }
-function exec(cmd) {
+function exec(cmd, ignoreErrors = false) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`Executing command "${cmd}"`);
         let myOutput = '';
@@ -1016,7 +1016,7 @@ function exec(cmd) {
         console.log('Process finished.');
         console.log(`Output: ${myOutput}`);
         console.log(`Errors: ${myError}`);
-        if (statusCode !== 0) {
+        if (statusCode !== 0 && !ignoreErrors) {
             core.setFailed(`Command exited with code ${statusCode}`);
             process.exit();
         }

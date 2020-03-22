@@ -18,15 +18,15 @@ async function run(): Promise<void> {
       await exec('npm i -g nativescript')
     } else {
       // Linux
-      await exec('$ANDROID_HOME/tools/bin/sdkmanager "tools;26.1.1"') // platform-tools platforms;android-28 build-tools;28.0.3
       await exec('sudo npm i -g nativescript')
+      await exec('tns doctor')
     }
   } catch (error) {
     core.setFailed(error.toString())
   }
 }
 
-async function exec(cmd: string): Promise<void> {
+async function exec(cmd: string, ignoreErrors = false): Promise<void> {
   console.log(`Executing command "${cmd}"`)
   let myOutput = ''
   let myError = ''
@@ -44,7 +44,7 @@ async function exec(cmd: string): Promise<void> {
   console.log('Process finished.')
   console.log(`Output: ${myOutput}`)
   console.log(`Errors: ${myError}`)
-  if (statusCode !== 0) {
+  if (statusCode !== 0 && !ignoreErrors) {
     core.setFailed(`Command exited with code ${statusCode}`)
     process.exit()
   }
