@@ -24,9 +24,24 @@ jobs:
   testDemoAndroid:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
     name: Build Android on ${{matrix.os}}
     runs-on: ${{matrix.os}}
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./
+    - name: Clone NativeScript Demo App
+      run: git clone https://github.com/NativeScript/nativescript-marketplace-demo
+    - name: Install dependencies
+      run: sudo npm install
+      working-directory: nativescript-marketplace-demo
+    - name: Build NativeScript Demo App
+      run: tns build android
+      working-directory: nativescript-marketplace-demo
+
+  testDemoAndroidWindows:
+    name: Build Android on windows-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
     - uses: ./
