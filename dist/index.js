@@ -989,9 +989,10 @@ function run() {
             }
             else {
                 // Linux
-                yield exec('wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
-                yield exec('sudo unzip -d $ANDROID_HOME android-sdk.zip');
+                yield exec('wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
+                yield exec('sudo unzip -d $ANDROID_HOME android-sdk.zip > /dev/null');
                 yield exec('echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager "platform-tools platforms;android-28 build-tools;28.0.3"');
+                yield exec('export PATH=$PATH:$ANDROID_HOME/tools/bin');
                 yield exec('sudo npm i -g nativescript');
             }
         }
