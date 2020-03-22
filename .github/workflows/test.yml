@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Update submodules
+      run: git submodule update && git submodule init
     - run: |
         npm install
         npm run all
