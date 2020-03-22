@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import {exec as execute} from '@actions/exec'
+import {installAndroidSdk} from './thirdparty/helperaction/src/sdk-installer'
 
 async function run(): Promise<void> {
   try {
@@ -12,7 +13,7 @@ async function run(): Promise<void> {
       await exec('brew install maven')
       await exec('brew install gradle')
       await exec('brew cask install android-sdk')
-      await exec('yes | sdkmanager --licenses', true)
+      /*await exec('yes | sdkmanager --licenses', true)
       await exec(
         'sdkmanager platform-tools platforms;android-28 build-tools;28.0.3'
       )
@@ -23,7 +24,8 @@ async function run(): Promise<void> {
       await exec('export PATH=$GRADLE_HOME/bin:$PATH')
       await exec('export PATH=$ANDROID_HOME/tools:$PATH')
       await exec('export PATH=$ANDROID_HOME/platform-tools:$PATH')
-      await exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH')
+      await exec('export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH')*/
+      await installAndroidSdk(29, 'default', 'x86', undefined)
       await exec('npm i -g nativescript')
     } else if (osvar === 'win32') {
       // Windows
