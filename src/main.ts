@@ -35,7 +35,7 @@ async function run(): Promise<void> {
       await exec('npm i -g nativescript')
     } else {
       // Linux
-      await exec('sudo apt-get update && sudo apt-get install android-sdk')
+      await exec('sudo apt-get install android-sdk')
       await exec('sudo npm i -g nativescript')
     }
   } catch (error) {
