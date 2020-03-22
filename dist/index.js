@@ -979,6 +979,7 @@ function run() {
             const osvar = process.platform.toLowerCase();
             if (osvar === 'darwin') {
                 // MacOSX
+                yield exec('pip install six');
                 yield exec('npm i -g nativescript');
             }
             else if (osvar === 'win32') {

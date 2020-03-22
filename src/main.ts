@@ -8,6 +8,7 @@ async function run(): Promise<void> {
 
     if (osvar === 'darwin') {
       // MacOSX
+      await exec('pip install six')
       await exec('npm i -g nativescript')
     } else if (osvar === 'win32') {
       // Windows
