@@ -1009,10 +1009,10 @@ function run() {
                 yield exec('mkdir /opt/android-sdk');
                 yield exec('curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
                 yield exec('unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk', true);
-                yield exec('echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"');
-                yield exec('echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"');
-                yield exec('echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"');
-                yield exec('echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "tools"');
+                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"');
+                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"');
+                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"');
+                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "tools"');
                 yield exec('sudo npm i -g nativescript');
             }
         }
