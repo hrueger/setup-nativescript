@@ -1008,11 +1008,10 @@ function run() {
                 // Linux
                 yield exec('mkdir /opt/android-sdk');
                 yield exec('curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
-                yield exec('unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk', true);
-                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"');
-                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"');
-                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"');
-                yield exec('"y" | /opt/android-sdk/tools/bin/sdkmanager --install "tools"');
+                yield exec('unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk');
+                yield exec('yes | /opt/android-sdk/tools/bin/sdkmanager --licenses');
+                console.log('Licenses accepted!');
+                yield exec('/opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"');
                 yield exec('sudo npm i -g nativescript');
             }
         }
@@ -1021,26 +1020,12 @@ function run() {
         }
     });
 }
-function exec(cmd, hideOutput = false) {
+function exec(cmd) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`Executing command "${cmd}"`);
-        let myOutput = '';
-        let myError = '';
         const options = {};
-        options.listeners = {
-            stdout: (data) => {
-                myOutput += data.toString();
-            },
-            stderr: (data) => {
-                myError += data.toString();
-            }
-        };
         const statusCode = yield exec_1.exec(cmd, [], options);
         console.log('Process finished.');
-        if (!hideOutput) {
-            console.log(`Output: ${myOutput}`);
-            console.log(`Errors: ${myError}`);
-        }
         if (statusCode !== 0) {
             core.setFailed(`Command exited with code ${statusCode}`);
             process.exit();

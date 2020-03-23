@@ -40,20 +40,12 @@ async function run(): Promise<void> {
         'curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip'
       )
       await exec(
-        'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk',
-        true
+        'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk'
       )
+      await exec('yes | /opt/android-sdk/tools/bin/sdkmanager --licenses')
+      console.log('Licenses accepted!')
       await exec(
-        '"y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"'
-      )
-      await exec(
-        '"y" | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"'
-      )
-      await exec(
-        '"y" | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"'
-      )
-      await exec(
-        '"y" | /opt/android-sdk/tools/bin/sdkmanager --install "tools"'
+        '/opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
       )
       await exec('sudo npm i -g nativescript')
     }
@@ -62,26 +54,11 @@ async function run(): Promise<void> {
   }
 }
 
-async function exec(cmd: string, hideOutput = false): Promise<void> {
+async function exec(cmd: string): Promise<void> {
   console.log(`Executing command "${cmd}"`)
-  let myOutput = ''
-  let myError = ''
-
   const options: any = {}
-  options.listeners = {
-    stdout: (data: Buffer) => {
-      myOutput += data.toString()
-    },
-    stderr: (data: Buffer) => {
-      myError += data.toString()
-    }
-  }
   const statusCode = await execute(cmd, [], options)
   console.log('Process finished.')
-  if (!hideOutput) {
-    console.log(`Output: ${myOutput}`)
-    console.log(`Errors: ${myError}`)
-  }
   if (statusCode !== 0) {
     core.setFailed(`Command exited with code ${statusCode}`)
     process.exit()
