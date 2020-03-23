@@ -44,16 +44,16 @@ async function run(): Promise<void> {
         true
       )
       await exec(
-        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"'
+        'echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"'
       )
       await exec(
-        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"'
+        'echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"'
       )
       await exec(
-        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"'
+        'echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"'
       )
       await exec(
-        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "tools"'
+        'echo "y" | /opt/android-sdk/tools/bin/sdkmanager --install "tools"'
       )
       await exec('sudo npm i -g nativescript')
     }
