@@ -1021,7 +1021,6 @@ function run() {
                   '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
                 )*/
                 yield exec('sudo npm i -g nativescript');
-                yield exec('tns setup');
             }
         }
         catch (error) {

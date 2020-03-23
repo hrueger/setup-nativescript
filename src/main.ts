@@ -50,7 +50,6 @@ async function run(): Promise<void> {
         '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
       )*/
       await exec('sudo npm i -g nativescript')
-      await exec('tns setup')
     }
   } catch (error) {
     core.setFailed(error.toString())
