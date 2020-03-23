@@ -36,13 +36,14 @@ async function run(): Promise<void> {
     } else {
       // Linux
       await exec('mkdir /opt/android-sdk')
-      await exec('cd /opt/android-sdk')
       await exec(
-        'curl --output sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip'
+        'curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip'
       )
-      await exec('unzip sdk-tools-linux.zip')
       await exec(
-        'echo -ne "y" | ./tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
+        'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk'
+      )
+      await exec(
+        'echo -ne "y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
       )
       await exec('sudo npm i -g nativescript')
     }

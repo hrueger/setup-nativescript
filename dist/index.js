@@ -1007,10 +1007,9 @@ function run() {
             else {
                 // Linux
                 yield exec('mkdir /opt/android-sdk');
-                yield exec('cd /opt/android-sdk');
-                yield exec('curl --output sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
-                yield exec('unzip sdk-tools-linux.zip');
-                yield exec('echo -ne "y" | ./tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"');
+                yield exec('curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
+                yield exec('unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk');
+                yield exec('echo -ne "y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"');
                 yield exec('sudo npm i -g nativescript');
             }
         }
