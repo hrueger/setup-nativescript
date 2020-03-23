@@ -42,7 +42,9 @@ async function run(): Promise<void> {
       await exec(
         'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk'
       )
-      await exec('yes | /opt/android-sdk/tools/bin/sdkmanager --licenses')
+      await exec(
+        '/bin/bash -c "yes | /opt/android-sdk/tools/bin/sdkmanager --licenses"'
+      )
       console.log('Licenses accepted!')
       await exec(
         '/opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
