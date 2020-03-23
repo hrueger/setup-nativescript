@@ -43,10 +43,17 @@ async function run(): Promise<void> {
         'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk',
         true
       )
-      await exec('yes | /opt/android-sdk/tools/bin/sdkmanager --licenses')
-      console.log('Licenses accepted!')
       await exec(
-        '/opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
+        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2"'
+      )
+      await exec(
+        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "platform-tools"'
+      )
+      await exec(
+        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "platforms;android-29"'
+      )
+      await exec(
+        'echo y | /opt/android-sdk/tools/bin/sdkmanager --install "tools"'
       )
       await exec('sudo npm i -g nativescript')
     }
