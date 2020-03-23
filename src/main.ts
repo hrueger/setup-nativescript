@@ -43,7 +43,7 @@ async function run(): Promise<void> {
         'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk'
       )
       await exec(
-        'echo -ne "y" | /opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
+        '/opt/android-sdk/tools/bin/sdkmanager "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
       )
       await exec('sudo npm i -g nativescript')
     }
@@ -52,7 +52,7 @@ async function run(): Promise<void> {
   }
 }
 
-async function exec(cmd: string, hideOutput=false): Promise<void> {
+async function exec(cmd: string, hideOutput = false): Promise<void> {
   console.log(`Executing command "${cmd}"`)
   let myOutput = ''
   let myError = ''
