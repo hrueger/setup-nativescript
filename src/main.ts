@@ -47,7 +47,7 @@ async function run(): Promise<void> {
       )
       console.log('Licenses accepted!')
       await exec(
-        '/opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"'
+        '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
       )
       await exec('sudo npm i -g nativescript')
     }

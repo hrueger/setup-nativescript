@@ -1011,7 +1011,7 @@ function run() {
                 yield exec('unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk');
                 yield exec('/bin/bash -c "yes | /opt/android-sdk/tools/bin/sdkmanager --licenses"');
                 console.log('Licenses accepted!');
-                yield exec('/opt/android-sdk/tools/bin/sdkmanager --install "build-tools;29.0.2" "platform-tools" "platforms;android-29" "tools"');
+                yield exec('/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"');
                 yield exec('sudo npm i -g nativescript');
             }
         }
