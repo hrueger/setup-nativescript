@@ -35,7 +35,7 @@ async function run(): Promise<void> {
       await exec('npm i -g nativescript')
     } else {
       // Linux
-      await exec('mkdir /opt/android-sdk')
+      /*await exec('mkdir /opt/android-sdk')
       await exec(
         'curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip'
       )
@@ -48,8 +48,9 @@ async function run(): Promise<void> {
       console.log('Licenses accepted!')
       await exec(
         '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
-      )
+      )*/
       await exec('sudo npm i -g nativescript')
+      await exec('tns setup')
     }
   } catch (error) {
     core.setFailed(error.toString())

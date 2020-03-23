@@ -1006,13 +1006,22 @@ function run() {
             }
             else {
                 // Linux
-                yield exec('mkdir /opt/android-sdk');
-                yield exec('curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
-                yield exec('unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk');
-                yield exec('/bin/bash -c "yes | /opt/android-sdk/tools/bin/sdkmanager --licenses"');
-                console.log('Licenses accepted!');
-                yield exec('/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"');
+                /*await exec('mkdir /opt/android-sdk')
+                await exec(
+                  'curl --output /opt/android-sdk/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip'
+                )
+                await exec(
+                  'unzip /opt/android-sdk/sdk-tools-linux.zip -d /opt/android-sdk'
+                )
+                await exec(
+                  '/bin/bash -c "yes | /opt/android-sdk/tools/bin/sdkmanager --licenses"'
+                )
+                console.log('Licenses accepted!')
+                await exec(
+                  '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
+                )*/
                 yield exec('sudo npm i -g nativescript');
+                yield exec('tns setup');
             }
         }
         catch (error) {
