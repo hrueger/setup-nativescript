@@ -1055,8 +1055,11 @@ function run() {
                 core.exportVariable('ANDROID_HOME', '/opt/android/sdk');
                 core.exportVariable('ADB_INSTALL_TIMEOUT', '120');
                 core.addPath('/opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools');
-                yield exec('mkdir ~/.android');
-                yield exec('/bin/bash -c "echo \'### User Sources for Android SDK Manager\' > ~/.android/repositories.cfg"');
+                /*await exec('mkdir ~/.android')
+          
+                await exec(
+                  '/bin/bash -c "echo \'### User Sources for Android SDK Manager\' > ~/.android/repositories.cfg"'
+                )*/
                 yield exec('/bin/bash -c "yes | sdkmanager --licenses"');
                 yield exec('sdkmanager --update');
                 yield exec('sdkmanager "tools" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"');

@@ -99,11 +99,11 @@ async function run(): Promise<void> {
         '/opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools'
       )
 
-      await exec('mkdir ~/.android')
+      /*await exec('mkdir ~/.android')
 
       await exec(
         '/bin/bash -c "echo \'### User Sources for Android SDK Manager\' > ~/.android/repositories.cfg"'
-      )
+      )*/
 
       await exec('/bin/bash -c "yes | sdkmanager --licenses"')
 
