@@ -49,35 +49,46 @@ async function run(): Promise<void> {
       await exec(
         '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
       )*/
+      await exec('sudo apt-get update')
       await exec(
-        'sudo apt-get update && apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
+        'apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
       )
 
-      await exec(
-        'sudo pip3 install -U lxml && pip3 install -U beautifulsoup4 && pip3 install -U crcmod && ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime'
-      )
+      await exec('sudo pip3 install -U lxml')
+      await exec('pip3 install -U beautifulsoup4')
+      await exec('pip3 install -U crcmod')
+      await exec('ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime')
 
       await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
 
-      await exec(
-        'export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-          /bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list" && \
-          /bin/bash -c "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -"'
-      )
+      await exec('export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"')
 
       await exec(
-        'sudo apt-get update && sudo apt-get install -y google-cloud-sdk && \
-          gcloud config set component_manager/disable_update_check true'
+        '/bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"'
+      )
+      await exec(
+        'curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -'
+      )
+
+      await exec('sudo apt-get update')
+
+      await exec('sudo apt-get install -y google-cloud-sdk')
+      await exec(
+        'gcloud config set component_manager/disable_update_check true'
       )
 
       await exec('sudo apt-get -y autoremove')
 
+      await exec('mkdir -p /opt/android/sdk')
+
       await exec(
-        'mkdir -p /opt/android/sdk && \
-          curl --silent --show-error --location --fail --retry 3 --output /tmp/sdk-tools-linux-4333796.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
-          unzip -q /tmp/sdk-tools-linux-4333796.zip -d /opt/android/sdk && \
-          rm /tmp/sdk-tools-linux-4333796.zip'
+        'curl --silent --show-error --location --fail --retry 3 --output /tmp/sdk-tools-linux-4333796.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip'
       )
+
+      await exec(
+        'unzip -q /tmp/sdk-tools-linux-4333796.zip -d /opt/android/sdk'
+      )
+      await exec('rm /tmp/sdk-tools-linux-4333796.zip')
 
       await exec('export ANDROID_HOME /opt/android/sdk')
       await exec('export ADB_INSTALL_TIMEOUT 120')
@@ -85,14 +96,15 @@ async function run(): Promise<void> {
         'export PATH /opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools:${PATH}'
       )
 
-      await exec(
-        'mkdir ~/.android && /bin/bash -c "echo \'### User Sources for Android SDK Manager\' > ~/.android/repositories.cfg"'
-      )
+      await exec('mkdir ~/.android')
 
       await exec(
-        '/bin/bash -c "yes | sdkmanager --licenses && sdkmanager --update"'
+        '/bin/bash -c "echo \'### User Sources for Android SDK Manager\' > ~/.android/repositories.cfg"'
       )
 
+      await exec('/bin/bash -c "yes | sdkmanager --licenses"')
+
+      await exec('sdkmanager --update')
       await exec(
         'sdkmanager "tools" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"'
       )
