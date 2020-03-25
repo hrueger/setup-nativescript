@@ -49,17 +49,17 @@ async function run(): Promise<void> {
       await exec(
         '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
       )*/
-      await exec('sudo apt-get update')
-      await exec(
-        'sudo apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
-      )
+      await exec('sudo apt update')
+      /*await exec(
+        'sudo apt install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
+      )*/
 
       await exec('sudo pip3 install -U lxml')
       await exec('pip3 install -U beautifulsoup4')
       await exec('pip3 install -U crcmod')
       await exec('sudo ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime')
 
-      await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
+      /*await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
 
       core.exportVariable('CLOUD_SDK_REPO', 'cloud-sdk-$(lsb_release -c -s)')
 
@@ -70,14 +70,14 @@ async function run(): Promise<void> {
         'curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -'
       )
 
-      await exec('sudo apt-get update')
+      await exec('sudo apt update')
 
-      await exec('sudo apt-get install -y google-cloud-sdk')
+      await exec('sudo apt install -y google-cloud-sdk')
       await exec(
         'gcloud config set component_manager/disable_update_check true'
-      )
+      )*/
 
-      await exec('sudo apt-get -y autoremove')
+      await exec('sudo apt -y autoremove')
 
       await exec('mkdir -p /opt/android/sdk')
 

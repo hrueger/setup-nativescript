@@ -1020,20 +1020,32 @@ function run() {
                 await exec(
                   '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
                 )*/
-                yield exec('sudo apt-get update');
-                yield exec('sudo apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release');
+                yield exec('sudo apt update');
+                /*await exec(
+                  'sudo apt install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
+                )*/
                 yield exec('sudo pip3 install -U lxml');
                 yield exec('pip3 install -U beautifulsoup4');
                 yield exec('pip3 install -U crcmod');
                 yield exec('sudo ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime');
-                yield exec('/bin/bash -c "curl -sL https://firebase.tools | bash"');
-                core.exportVariable('CLOUD_SDK_REPO', 'cloud-sdk-$(lsb_release -c -s)');
-                yield exec('/bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"');
-                yield exec('curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -');
-                yield exec('sudo apt-get update');
-                yield exec('sudo apt-get install -y google-cloud-sdk');
-                yield exec('gcloud config set component_manager/disable_update_check true');
-                yield exec('sudo apt-get -y autoremove');
+                /*await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
+          
+                core.exportVariable('CLOUD_SDK_REPO', 'cloud-sdk-$(lsb_release -c -s)')
+          
+                await exec(
+                  '/bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"'
+                )
+                await exec(
+                  'curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -'
+                )
+          
+                await exec('sudo apt update')
+          
+                await exec('sudo apt install -y google-cloud-sdk')
+                await exec(
+                  'gcloud config set component_manager/disable_update_check true'
+                )*/
+                yield exec('sudo apt -y autoremove');
                 yield exec('mkdir -p /opt/android/sdk');
                 yield exec('curl --silent --show-error --location --fail --retry 3 --output /tmp/sdk-tools-linux-4333796.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
                 yield exec('unzip -q /tmp/sdk-tools-linux-4333796.zip -d /opt/android/sdk');
