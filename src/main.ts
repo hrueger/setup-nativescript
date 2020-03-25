@@ -51,7 +51,7 @@ async function run(): Promise<void> {
       )*/
       await exec('sudo apt-get update')
       await exec(
-        'apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
+        'sudo apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
       )
 
       await exec('sudo pip3 install -U lxml')

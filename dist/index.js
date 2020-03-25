@@ -1021,7 +1021,7 @@ function run() {
                   '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
                 )*/
                 yield exec('sudo apt-get update');
-                yield exec('apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release');
+                yield exec('sudo apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release');
                 yield exec('sudo pip3 install -U lxml');
                 yield exec('pip3 install -U beautifulsoup4');
                 yield exec('pip3 install -U crcmod');
