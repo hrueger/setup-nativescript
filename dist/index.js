@@ -1027,7 +1027,7 @@ function run() {
                 yield exec('pip3 install -U crcmod');
                 yield exec('sudo ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime');
                 yield exec('/bin/bash -c "curl -sL https://firebase.tools | bash"');
-                yield exec('export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"');
+                core.exportVariable('CLOUD_SDK_REPO', 'cloud-sdk-$(lsb_release -c -s)');
                 yield exec('/bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"');
                 yield exec('curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -');
                 yield exec('sudo apt-get update');
@@ -1038,9 +1038,9 @@ function run() {
                 yield exec('curl --silent --show-error --location --fail --retry 3 --output /tmp/sdk-tools-linux-4333796.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
                 yield exec('unzip -q /tmp/sdk-tools-linux-4333796.zip -d /opt/android/sdk');
                 yield exec('rm /tmp/sdk-tools-linux-4333796.zip');
-                yield exec('export ANDROID_HOME /opt/android/sdk');
-                yield exec('export ADB_INSTALL_TIMEOUT 120');
-                yield exec('export PATH /opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools:${PATH}');
+                core.exportVariable('ANDROID_HOME', '/opt/android/sdk');
+                core.exportVariable('ADB_INSTALL_TIMEOUT', '120');
+                core.addPath('/opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools');
                 yield exec('mkdir ~/.android');
                 yield exec('/bin/bash -c "echo \'### User Sources for Android SDK Manager\' > ~/.android/repositories.cfg"');
                 yield exec('/bin/bash -c "yes | sdkmanager --licenses"');

@@ -61,7 +61,7 @@ async function run(): Promise<void> {
 
       await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
 
-      await exec('export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"')
+      core.exportVariable('CLOUD_SDK_REPO', 'cloud-sdk-$(lsb_release -c -s)')
 
       await exec(
         '/bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"'
@@ -90,10 +90,10 @@ async function run(): Promise<void> {
       )
       await exec('rm /tmp/sdk-tools-linux-4333796.zip')
 
-      await exec('export ANDROID_HOME /opt/android/sdk')
-      await exec('export ADB_INSTALL_TIMEOUT 120')
-      await exec(
-        'export PATH /opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools:${PATH}'
+      core.exportVariable('ANDROID_HOME', '/opt/android/sdk')
+      core.exportVariable('ADB_INSTALL_TIMEOUT', '120')
+      core.addPath(
+        '/opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools'
       )
 
       await exec('mkdir ~/.android')
