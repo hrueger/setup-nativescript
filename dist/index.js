@@ -1025,7 +1025,7 @@ function run() {
                 yield exec('sudo pip3 install -U lxml');
                 yield exec('pip3 install -U beautifulsoup4');
                 yield exec('pip3 install -U crcmod');
-                yield exec('ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime');
+                yield exec('sudo ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime');
                 yield exec('/bin/bash -c "curl -sL https://firebase.tools | bash"');
                 yield exec('export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"');
                 yield exec('/bin/bash -c "echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"');

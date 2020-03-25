@@ -57,7 +57,7 @@ async function run(): Promise<void> {
       await exec('sudo pip3 install -U lxml')
       await exec('pip3 install -U beautifulsoup4')
       await exec('pip3 install -U crcmod')
-      await exec('ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime')
+      await exec('sudo ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime')
 
       await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
 
