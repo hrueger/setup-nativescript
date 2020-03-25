@@ -50,11 +50,11 @@ async function run(): Promise<void> {
         '/opt/android-sdk/tools/bin/sdkmanager --install "tools" "emulator" "platform-tools" "platforms;android-28" "build-tools;28.0.3" "extras;android;m2repository" "extras;google;m2repository"'
       )*/
       await exec(
-        'apt-get update && apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
+        'sudo apt-get update && apt-get install -qqy git locales ca-certificates curl unzip lcov sudo python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release'
       )
 
       await exec(
-        'pip3 install -U lxml && pip3 install -U beautifulsoup4 && pip3 install -U crcmod && ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime'
+        'sudo pip3 install -U lxml && pip3 install -U beautifulsoup4 && pip3 install -U crcmod && ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime'
       )
 
       await exec('/bin/bash -c "curl -sL https://firebase.tools | bash"')
@@ -66,11 +66,11 @@ async function run(): Promise<void> {
       )
 
       await exec(
-        'apt-get update && sudo apt-get install -y google-cloud-sdk && \
+        'sudo apt-get update && sudo apt-get install -y google-cloud-sdk && \
           gcloud config set component_manager/disable_update_check true'
       )
 
-      await exec('apt-get -y autoremove')
+      await exec('sudo apt-get -y autoremove')
 
       await exec(
         'mkdir -p /opt/android/sdk && \
