@@ -16,5 +16,5 @@ This is a GitHub Action to setup the NativeScript development environment on Win
 
 Put this in your workflow file:
 ```yml
-- uses: hrueger/setup-nativescript@v1.0.0
+- uses: hrueger/setup-nativescript@v1.0.1
 ```
