@@ -23,8 +23,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: ./
-    - name: TNS Doctor
-      run: tns doctor
+    - name: NativeScript Doctor
+      run: ns doctor
 
   testDemoAndroid:
     strategy:
@@ -35,14 +35,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: ./
-    - name: Clone NativeScript Demo App
-      run: git clone https://github.com/NativeScript/nativescript-marketplace-demo
+    - name: Clone a NativeScript Demo App
+      run: git clone https://github.com/hrueger/nativescript-angular-template
     - name: Install dependencies
       run: sudo npm install
-      working-directory: nativescript-marketplace-demo
+      working-directory: nativescript-angular-template
     - name: Build NativeScript Demo App
-      run: tns build android
-      working-directory: nativescript-marketplace-demo
+      run: ns build android
+      working-directory: nativescript-angular-template
 
   testDemoAndroidWindows:
     name: Build Android on windows-latest
@@ -50,14 +50,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: ./
-    - name: Clone NativeScript Demo App
-      run: git clone https://github.com/NativeScript/nativescript-marketplace-demo
+    - name: Clone a NativeScript Demo App
+      run: git clone https://github.com/hrueger/nativescript-angular-template
     - name: Install dependencies
       run: npm install
-      working-directory: nativescript-marketplace-demo
+      working-directory: nativescript-angular-template
     - name: Build NativeScript Demo App
-      run: tns build android
-      working-directory: nativescript-marketplace-demo
+      run: ns build android
+      working-directory: nativescript-angular-template
 
   testDemoiOS:
     name: Build iOS on MacOSX
@@ -65,12 +65,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: ./
-    - name: Clone NativeScript Demo App
-      run: git clone https://github.com/NativeScript/nativescript-marketplace-demo
+    - name: Clone a NativeScript Demo App
+      run: git clone https://github.com/hrueger/nativescript-angular-template
     - name: Install dependencies
       run: npm install
-      working-directory: nativescript-marketplace-demo
+      working-directory: nativescript-angular-template
     - name: Build NativeScript Demo App
-      run: tns build ios
-      working-directory: nativescript-marketplace-demo
+      run: ns build ios
+      working-directory: nativescript-angular-template
           
