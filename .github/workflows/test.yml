@@ -7,7 +7,10 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
     - name: Update submodules
       run: git submodule init && git submodule update
     - run: |
@@ -21,7 +24,10 @@ jobs:
     name: Test on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
     - uses: ./
     - name: NativeScript Doctor
       run: ns doctor
@@ -33,7 +39,10 @@ jobs:
     name: Build Android on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
     - uses: ./
     - name: Clone a NativeScript Demo App
       run: git clone https://github.com/hrueger/nativescript-angular-template
@@ -48,7 +57,10 @@ jobs:
     name: Build Android on windows-latest
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
     - uses: ./
     - name: Clone a NativeScript Demo App
       run: git clone https://github.com/hrueger/nativescript-angular-template
@@ -63,7 +75,10 @@ jobs:
     name: Build iOS on MacOSX
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
     - uses: ./
     - name: Clone a NativeScript Demo App
       run: git clone https://github.com/hrueger/nativescript-angular-template
