@@ -41,14 +41,16 @@ async function run(): Promise<void> {
         '/opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools'
       )
       await exec('/bin/bash -c "yes | sdkmanager --licenses"')
-      await exec('sdkmanager --update')
+      await exec('/bin/bash -c "sdkmanager --update | grep -v = || true"')
       await exec(
-        'sdkmanager "tools" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"'
+        "/bin/bash -c \"sdkmanager 'tools' 'platform-tools' 'extras;android;m2repository'  'extras;google;m2repository' 'extras;google;google_play_services' | grep -v = || true\""
       )
       await exec(
-        'sdkmanager "build-tools;29.0.0" "build-tools;29.0.1" "build-tools;29.0.2"'
+        "/bin/bash -c \"sdkmanager 'build-tools;29.0.0' 'build-tools;29.0.1' 'build-tools;29.0.2' | grep -v = || true\""
       )
-      await exec('sdkmanager "platforms;android-29"')
+      await exec(
+        '/bin/bash -c "sdkmanager \'platforms;android-29\' | grep -v = || true"'
+      )
       await exec(nativescriptInstallCmd)
     }
   } catch (error) {
