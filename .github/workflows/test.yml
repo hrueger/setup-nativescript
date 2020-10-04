@@ -85,6 +85,8 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: nativescript-angular-template
+    - name: Update pods
+      run: pod repo update
     - name: Build NativeScript Demo App
       run: ns build ios
       working-directory: nativescript-angular-template
