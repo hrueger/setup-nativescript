@@ -16,12 +16,12 @@ This is a GitHub Action to setup the NativeScript development environment on Win
 
 Put this in your workflow file:
 ```yml
-- uses: hrueger/setup-nativescript@v1.0.1
+- uses: hrueger/setup-nativescript@v1.1.0
 ```
 
 You can specify the NativeScript CLI version like so:
 ```yml
-- uses: hrueger/setup-nativescript@v1.0.1
+- uses: hrueger/setup-nativescript@v1.1.0
   with:
     nativescript-version: '7.0.10'
 ```
