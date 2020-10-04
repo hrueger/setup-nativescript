@@ -44,6 +44,8 @@ jobs:
       with:
         node-version: '12'
     - uses: ./
+      with:
+        nativescript-version: '7.0.10'
     - name: Clone a NativeScript Demo App
       run: git clone https://github.com/hrueger/nativescript-angular-template
     - name: Install dependencies
@@ -62,6 +64,8 @@ jobs:
       with:
         node-version: '12'
     - uses: ./
+      with:
+        nativescript-version: '7.0.10'
     - name: Clone a NativeScript Demo App
       run: git clone https://github.com/hrueger/nativescript-angular-template
     - name: Install dependencies
@@ -80,6 +84,8 @@ jobs:
       with:
         node-version: '12'
     - uses: ./
+      with:
+        nativescript-version: '7.0.10'
     - name: Clone a NativeScript Demo App
       run: git clone https://github.com/hrueger/nativescript-angular-template
     - name: Install dependencies
