@@ -4,6 +4,9 @@ import {installAndroidSdk} from './thirdparty/helperaction/src/sdk-installer'
 
 async function run(): Promise<void> {
   try {
+    const version = core.getInput('nativescript-version') || 'latest'
+    const nativescriptInstallCmd = `npm i -g nativescript@${version}`
+
     await exec('npm config set unsafe-perm=true')
     const osvar = process.platform.toLowerCase()
 
@@ -14,13 +17,13 @@ async function run(): Promise<void> {
       await exec('brew install gradle')
       await exec('brew cask install android-sdk')
       await installAndroidSdk(29, 'default', 'x86', undefined)
-      await exec('npm i -g nativescript')
+      await exec(nativescriptInstallCmd)
     } else if (osvar === 'win32') {
       // Windows
       await exec(
         'setx path "%path%;c:\\Program Files (x86)\\Android\\android-sdk\\build-tools\\29.0.3"'
       )
-      await exec('npm i -g nativescript')
+      await exec(nativescriptInstallCmd)
     } else {
       // Linux
 
@@ -46,7 +49,7 @@ async function run(): Promise<void> {
         'sdkmanager "build-tools;29.0.0" "build-tools;29.0.1" "build-tools;29.0.2"'
       )
       await exec('sdkmanager "platforms;android-29"')
-      await exec('sudo npm i -g nativescript')
+      await exec(nativescriptInstallCmd)
     }
   } catch (error) {
     core.setFailed(error.toString())
