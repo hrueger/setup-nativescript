@@ -25,3 +25,6 @@ You can specify the NativeScript CLI version like so:
   with:
     nativescript-version: '7.0.10'
 ```
+
+## License
+MIT
