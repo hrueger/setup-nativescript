@@ -1,7 +1,7 @@
 # Setup Nativescript Action
 ![Build & Test](https://github.com/hrueger/setup-nativescript/workflows/Build%20&%20Test/badge.svg)
 
-This is a GitHub Action to setup the NativeScript development environment on Windows, Linux and MacOSX.
+This is a GitHub Action to setup the NativeScript development environment on Windows, Linux and macOS.
 
 ## Supports
 |                   | Windows           | Ubuntu            | MacOSX            |
