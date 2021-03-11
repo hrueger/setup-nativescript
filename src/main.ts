@@ -16,7 +16,7 @@ async function run(): Promise<void> {
       await exec('pip install six')
       await exec('brew install maven')
       await exec('brew install gradle')
-      await exec('brew cask install android-sdk')
+      await exec('brew --cask install android-sdk')
       await installAndroidSdk(29, 'default', 'x86', undefined)
       await exec(nativescriptInstallCmd)
     } else if (osvar === 'win32') {
