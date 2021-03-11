@@ -1058,18 +1058,7 @@ function run() {
             }
             else {
                 // Linux
-                yield exec('mkdir -p /opt/android/sdk');
-                yield exec('curl --silent --show-error --location --fail --retry 3 --output /tmp/sdk-tools-linux-4333796.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip');
-                yield exec('unzip -q /tmp/sdk-tools-linux-4333796.zip -d /opt/android/sdk');
-                yield exec('rm /tmp/sdk-tools-linux-4333796.zip');
-                core.exportVariable('ANDROID_HOME', '/opt/android/sdk');
-                core.exportVariable('ADB_INSTALL_TIMEOUT', '120');
-                core.addPath('/opt/android/sdk/emulator:/opt/android/sdk/tools:/opt/android/sdk/tools/bin:/opt/android/sdk/platform-tools');
-                yield exec('/bin/bash -c "yes | sdkmanager --licenses"');
-                yield exec('/bin/bash -c "sdkmanager --update | grep -v = || true"');
-                yield exec("/bin/bash -c \"sdkmanager 'tools' 'platform-tools' 'extras;android;m2repository'  'extras;google;m2repository' 'extras;google;google_play_services' | grep -v = || true\"");
-                yield exec("/bin/bash -c \"sdkmanager 'build-tools;29.0.0' 'build-tools;29.0.1' 'build-tools;29.0.2' | grep -v = || true\"");
-                yield exec('/bin/bash -c "sdkmanager \'platforms;android-29\' | grep -v = || true"');
+                yield exec('node lib/thirdparty/setup-android/dist/index.js');
                 yield exec(nativescriptInstallCmd);
             }
         }
