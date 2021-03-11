@@ -1,3 +1,6 @@
 [submodule "src/thirdparty/helperaction"]
 	path = src/thirdparty/helperaction
 	url = https://github.com/ReactiveCircus/android-emulator-runner
+[submodule "lib/thirdparty/setup-android"]
+	path = lib/thirdparty/setup-android
+	url = https://github.com/android-actions/setup-android
