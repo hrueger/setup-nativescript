@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '12'
+        node-version: '14'
     - name: Update submodules
       run: git submodule init && git submodule update
     - run: |
@@ -27,7 +27,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '12'
+        node-version: '14'
     - uses: ./
     - name: NativeScript Doctor
       run: ns doctor
@@ -42,7 +42,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '12'
+        node-version: '14'
     - uses: ./
       with:
         nativescript-version: '7.0.10'
@@ -62,7 +62,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '12'
+        node-version: '14'
     - uses: ./
       with:
         nativescript-version: '7.0.10'
@@ -82,7 +82,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '12'
+        node-version: '14'
     - uses: ./
       with:
         nativescript-version: '7.0.10'

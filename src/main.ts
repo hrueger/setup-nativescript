@@ -14,8 +14,6 @@ async function run(): Promise<void> {
     if (osvar === 'darwin') {
       // MacOSX
       await exec('pip install six')
-      await exec('brew install maven')
-      await exec('brew install gradle')
       await exec('brew install android-sdk')
       await installAndroidSdk(29, 'default', 'x86', undefined)
       await exec(nativescriptInstallCmd)

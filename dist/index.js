@@ -38,8 +38,6 @@ function run() {
             if (osvar === 'darwin') {
                 // MacOSX
                 yield exec('pip install six');
-                yield exec('brew install maven');
-                yield exec('brew install gradle');
                 yield exec('brew install android-sdk');
                 yield sdk_installer_1.installAndroidSdk(29, 'default', 'x86', undefined);
                 yield exec(nativescriptInstallCmd);
