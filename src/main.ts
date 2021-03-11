@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
+import * as path from 'path'
 import {exec as execute} from '@actions/exec'
-import {installAndroidSdk} from './thirdparty/helperaction/src/sdk-installer'
+import {installAndroidSdk} from './thirdparty/android-emulator-runner/src/sdk-installer'
 
 async function run(): Promise<void> {
   try {
@@ -26,7 +27,8 @@ async function run(): Promise<void> {
       await exec(nativescriptInstallCmd)
     } else {
       // Linux
-      await exec('node lib/thirdparty/setup-android/dist/index.js')
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require(path.join(__dirname, './setup-android.js'))
       await exec(nativescriptInstallCmd)
     }
   } catch (error) {
