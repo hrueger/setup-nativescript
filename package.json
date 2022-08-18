@@ -24,7 +24,7 @@
   "author": "H. Rüger",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.9.1",
     "@actions/exec": "^1.0.3",
     "@actions/tool-cache": "^1.6.1",
     "@types/fs-extra": "^9.0.8",
