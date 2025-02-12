@@ -33,12 +33,11 @@ function run() {
         try {
             const version = core.getInput('nativescript-version') || 'latest';
             const nativescriptInstallCmd = `npm i -g nativescript@${version}`;
-            yield exec('npm config set unsafe-perm=true');
             const osvar = process.platform.toLowerCase();
             if (osvar === 'darwin') {
                 // MacOSX
                 yield exec('pip install six');
-                yield exec('brew install android-sdk');
+                yield exec('brew install android-commandlinetools');
                 yield sdk_installer_1.installAndroidSdk(29, 'default', 'x86', undefined);
                 yield exec(nativescriptInstallCmd);
             }
