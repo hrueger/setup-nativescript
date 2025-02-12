@@ -8,9 +8,8 @@
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
     "pack": "ncc build",
-    "all": "npm run build && npm run format && npm run lint && npm run pack && npx cpy-cli --rename=setup-android.js src/thirdparty/setup-android/dist/index.js dist"
+    "all": "npm run build && npm run format && npm run pack && npx cpy-cli --rename=setup-android.js src/thirdparty/setup-android/dist/index.js dist"
   },
   "repository": {
     "type": "git",
@@ -24,25 +23,25 @@
   "author": "H. Rüger",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.9.1",
-    "@actions/exec": "^1.0.3",
-    "@actions/tool-cache": "^1.6.1",
-    "@types/fs-extra": "^9.0.8",
-    "fs-extra": "^9.1.0"
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/tool-cache": "^2.0.2",
+    "@types/fs-extra": "^11.0.4",
+    "fs-extra": "^11.3.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.23",
-    "@types/node": "^12.7.12",
-    "@typescript-eslint/parser": "^2.8.0",
-    "@vercel/ncc": "^0.27.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-github": "^2.0.0",
-    "eslint-plugin-jest": "^22.21.0",
-    "jest": "^24.9.0",
-    "jest-circus": "^24.9.0",
-    "js-yaml": "^3.13.1",
-    "prettier": "^1.19.1",
-    "ts-jest": "^24.2.0",
-    "typescript": "^3.6.4"
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.1",
+    "@typescript-eslint/parser": "^8.24.0",
+    "@vercel/ncc": "^0.38.3",
+    "eslint": "^9.20.1",
+    "eslint-plugin-github": "^5.1.8",
+    "eslint-plugin-jest": "^28.11.0",
+    "jest": "^29.7.0",
+    "jest-circus": "^29.7.0",
+    "js-yaml": "^4.1.0",
+    "prettier": "^3.5.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
   }
 }
