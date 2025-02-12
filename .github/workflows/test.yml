@@ -7,10 +7,10 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '22'
     - name: Update submodules
       run: git submodule init && git submodule update
     - run: |
@@ -24,10 +24,10 @@ jobs:
     name: Test on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '22'
     - uses: ./
     - name: NativeScript Doctor
       run: ns doctor
@@ -39,10 +39,10 @@ jobs:
     name: Build Android on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '22'
     - uses: ./
       with:
         nativescript-version: '7.0.10'
@@ -59,10 +59,10 @@ jobs:
     name: Build Android on windows-latest
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '22'
     - uses: ./
       with:
         nativescript-version: '7.0.10'
@@ -79,10 +79,10 @@ jobs:
     name: Build iOS on MacOSX
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '22'
     - uses: ./
       with:
         nativescript-version: '7.0.10'
